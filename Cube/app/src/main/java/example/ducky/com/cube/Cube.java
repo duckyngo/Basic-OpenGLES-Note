@@ -51,12 +51,21 @@ public class Cube {
              1.0f,-1.0f, -1.0f,
              1.0f, 1.0f, -1.0f,
 
+            0.0f, 0.0f, 0.0f,
+            100.0f, 0.0f, 0.0f,
+
+//            0.0f, 0.0f, 0.0f,
+            0.0f, 100.0f, 0.0f,
+
+//            0.0f, 0.0f, 0.0f,
+            0.0f, 0.0f, 100.0f
+
     };
 
-    static short indice[] = {0, 1, 2, 3,   0, 3, 7, 4,   0, 4,  5, 1    , 6, 7, 3, 2,    6, 2, 1, 5,    6, 5, 4, 7};
+    static short indice[] = {0, 1, 2, 3,   0, 3, 7, 4,   0, 4,  5, 1    , 6, 7, 3, 2,    6, 2, 1, 5,    6, 5, 4, 7,   8, 9, 8, 10, 8, 11 };
 
-    float color[][] = {{0.0f, 1.0f, 0.0f, 1.0f},
-            {1.0f, 0.0f, 0.0f, 1.0f},
+    float color[][] = {{1.0f, 0.0f, 0.0f, 1.0f},
+            {0.0f, 1.0f, 0.0f, 1.0f},
             {0.0f, 0.0f, 1.0f, 1.0f},
             {1.0f, 1.0f, 0.0f, 1.0f},
             {1.0f, 0.0f, 1.0f, 1.0f},
@@ -86,7 +95,7 @@ public class Cube {
         GLES20.glLinkProgram(mProgram);
     }
 
-    public void draw(float[] mvpMatrix){
+    public void draw(float[] OrigmvpMatrix, float[] mvpMatrix){
         GLES20.glUseProgram(mProgram);
 
         mPositionLocation = GLES20.glGetAttribLocation(mProgram, A_POSITON);
@@ -108,6 +117,18 @@ public class Cube {
             GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, 4, GLES20.GL_UNSIGNED_SHORT, mIndiceBuffer);
 
         }
+
+        GLES20.glUniformMatrix4fv(mMVPMatrixLoaction, 1, false, OrigmvpMatrix, 0);
+        checkGlError("glUniformMatrix4fv");
+
+        for (int i = 0; i < 3; i++){
+            GLES20.glUniform4fv(mColorLocation, 1, color[i], 0);
+
+            mIndiceBuffer.position(24 + i * 2);
+            GLES20.glDrawElements(GLES20.GL_LINES, 2, GLES20.GL_UNSIGNED_SHORT, mIndiceBuffer);
+        }
+
+
 
         GLES20.glDisableVertexAttribArray(mPositionLocation);
     }

@@ -56,7 +56,7 @@ public class MyRenderer implements GLSurfaceView.Renderer {
 
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
-        Matrix.setLookAtM(mViewMatrix, 0, -9, -9, -9, 0f, 0f, 0f, 0f, 1.0f, 0f);
+        Matrix.setLookAtM(mViewMatrix, 0, -9, -9, -9, 0f, 0f, 0f, 0f, -1.0f, 0f);
 
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 
@@ -64,6 +64,6 @@ public class MyRenderer implements GLSurfaceView.Renderer {
 
         Matrix.multiplyMM(scrach, 0, mMVPMatrix, 0, mRotationMatrix, 0);
 
-        mCube.draw(scrach);
+        mCube.draw(mMVPMatrix, scrach);
     }
 }
