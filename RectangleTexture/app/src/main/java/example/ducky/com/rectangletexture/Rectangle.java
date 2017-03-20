@@ -21,7 +21,6 @@ public class Rectangle {
             "uniform mat4 uMVPMatrix;" +
                     "attribute vec4 vPosition;" +
                     "attribute vec2 a_TexCoordinate;" +
-                    "" +
                     "varying vec2 v_TexCoordinate;" +
                     "void main(){" +
                     "   v_TexCoordinate = a_TexCoordinate;" +
@@ -30,7 +29,6 @@ public class Rectangle {
 
     private final String fragmentShaderCode =
             "precision mediump float;" +
-                    "uniform vec4 vColor;" +
                     "uniform sampler2D u_Texture;" +
                     "varying vec2 v_TexCoordinate;" +
                     "void main(){" +
@@ -97,17 +95,19 @@ public class Rectangle {
 
         mPositionLocation = GLES20.glGetAttribLocation(mProgram, A_POSITON);
         GLES20.glEnableVertexAttribArray(mPositionLocation);
+        mSquareVertexBuffer.position(0);
         GLES20.glVertexAttribPointer(mPositionLocation, 3, GLES20.GL_FLOAT, false,  3 * 4, mSquareVertexBuffer);
 
         mTextureCoordLocation = GLES20.glGetAttribLocation(mProgram, A_TEXTURECOOR);
         GLES20.glEnableVertexAttribArray(mTextureCoordLocation);
+        mSquareVertexBuffer.position(3);
         GLES20.glVertexAttribPointer(mPositionLocation, 2, GLES20.GL_FLOAT, false,  2 * 4, mSquareVertexBuffer);
 
         mTextureUniformLocation = GLES20.glGetUniformLocation(mProgram, U_TEXTURE);
         GLES20.glUniform1i(mTextureUniformLocation, 0);
-
-        mColorLocation = GLES20.glGetUniformLocation(mProgram, U_COLOR);
-        GLES20.glUniform4fv(mColorLocation, 1, color, 0);
+//
+//        mColorLocation = GLES20.glGetUniformLocation(mProgram, U_COLOR);
+//        GLES20.glUniform4fv(mColorLocation, 1, color, 0);
 
         mMVPMatrixLoaction = GLES20.glGetUniformLocation(mProgram, U_MATRIX);
         checkGlError("glGetUniformLocation");
