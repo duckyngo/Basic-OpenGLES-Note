@@ -8,3 +8,4 @@ Project list:
 	1. Triangle with color
 	2. Square with color
 	3. Cube 
+	4. Rectange with texture

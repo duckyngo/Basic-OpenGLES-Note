@@ -4,8 +4,10 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="example.ducky.com.square.MainActivity">
+    tools:context="example.ducky.com.rectangletexture.MainActivity">
 
-
-
+    <FrameLayout
+        android:id="@+id/gl_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 </RelativeLayout>
