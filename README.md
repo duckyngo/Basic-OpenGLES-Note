@@ -1,4 +1,4 @@
-LEAN OPENGLES FOR ANDROID
+LEARN OPENGLES FOR ANDROID
 =========================
 
 ### In this repository, I store some projects when learning OpenGLES
